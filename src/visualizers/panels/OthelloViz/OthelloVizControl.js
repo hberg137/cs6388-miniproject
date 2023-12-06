@@ -27,6 +27,9 @@ define([
         this._currentNodeId = null;
         this._currentNodeParentId = undefined;
 
+        this._updateWidget = null;
+        this._descriptor = null;
+
         this._initWidgetEventHandlers();
 
         this._logger.debug('ctor finished');
@@ -37,6 +40,15 @@ define([
             // Change the current active object
             WebGMEGlobal.State.registerActiveObject(id);
         };
+    };
+
+    OthelloVizControl.prototype.registerUpdate = function (func) {
+        console.log('trying to register...');
+        const firstTry = this._updateWidget === null ? true : false;
+        this._updateWidget = func;
+        if(firstTry) {
+            this._updateWidget();
+        }
     };
 
     /* * * * * * * * Visualizer content update callbacks * * * * * * * */

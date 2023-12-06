@@ -2,7 +2,7 @@
   "components": {
     "seeds": {
       "seed": {
-        "src": "src/seeds"
+        "src": "src/seeds/seed"
       }
     },
     "visualizers": {
@@ -13,10 +13,17 @@
         "secondary": false,
         "widget": "src/visualizers/widgets/OthelloViz"
       }
+    },
+    "plugins": {
+      "Counting": {
+        "src": "src/plugins/Counting",
+        "test": "test/plugins/Counting"
+      }
     }
   },
   "dependencies": {
     "seeds": {},
-    "visualizers": {}
+    "visualizers": {},
+    "plugins": {}
   }
 }

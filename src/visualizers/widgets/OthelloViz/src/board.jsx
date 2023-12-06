@@ -1,7 +1,7 @@
 import CONSTANTS from 'constants.js';
 {/* import Tile from './tile'; */}
 
-export default function Board({player, board, win}) {
+export default function Board() {
 
     {/*
     const getTiles = () => {

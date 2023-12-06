@@ -2,7 +2,7 @@ import React, {useCallback, useState} from 'react';
 import Board from './board';
 import CONSTANTS from 'constants.js';
 
-export default function Othello({player, win, board}) {
+export default function Othello() {
     {/*
     const getLabel = () => {
         if(!win) {
@@ -31,7 +31,9 @@ export default function Othello({player, win, board}) {
     }
 */}
     return (
-    <div style={{ width: '100%', height: '100%', fontFamily:'fantasy', fontSize:'36px', fontWeight:'bold'}}>{'test'}
+    <div style={{ width: '100%', height: '100%', fontFamily:'fantasy', fontSize:'36px', fontWeight:'bold'}}>
+        {'test'}
+        <Board />
     </div>
     );
 }

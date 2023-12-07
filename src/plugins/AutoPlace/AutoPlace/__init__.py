@@ -7,8 +7,10 @@ import os
 import logging
 from webgme_bindings import PluginBase
 
-from ...ValidTiles.ValidTiles import ValidTiles
-from ...FlipTiles.FlipTiles import FlipTiles
+# Set path for modules
+sys.path.append('.')
+from src.plugins.ValidTiles.ValidTiles import ValidTiles
+from src.plugins.FlipTiles.FlipTiles import FlipTiles
 
 # Setup a logger
 logger = logging.getLogger('AutoPlace')
@@ -23,11 +25,9 @@ class AutoPlace(PluginBase):
     def main(self):
         active_node = self.active_node
         core = self.core
-        
-        logger.error(os.getcwd())
 
         gsNode = {"rootId": active_node.get("rootId"), "nodePath": core.get_pointer_path(active_node, "currentState")}
-        flips = ValidTiles()
+        flips = ValidTiles.main(self)
         # Choose the first valid tile
         for key in flips:
             pos = [int(key[0]), int(key[-1])]
@@ -36,4 +36,4 @@ class AutoPlace(PluginBase):
             logger.warn(chains)
             break
         
-        FlipTiles(pos, chains)
+        FlipTiles.main(self, pos, chains)

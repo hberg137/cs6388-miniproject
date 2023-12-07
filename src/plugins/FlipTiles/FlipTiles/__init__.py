@@ -6,6 +6,10 @@ import sys
 import logging
 from webgme_bindings import PluginBase
 
+# Set path for modules
+sys.path.append('.')
+from src.plugins.ValidTiles.ValidTiles import ValidTiles
+
 # Setup a logger
 logger = logging.getLogger('FlipTiles')
 logger.setLevel(logging.INFO)
@@ -134,7 +138,7 @@ class FlipTiles(PluginBase):
             core.set_pointer(newGS, "previousState", gsNode)
             core.set_pointer(active_node, "currentState", newGS)
             
-            valid()
+            ValidTiles.main(self)
 
             logger.debug(core.get_children_paths(newGS))
             self.util.save(self.root_node, self.commit_hash, self.branch_name, 'New GS created')

@@ -7,6 +7,10 @@ import logging
 import json
 from webgme_bindings import PluginBase
 
+# Set path for modules
+sys.path.append('.')
+from src.plugins.ValidTiles.ValidTiles import ValidTiles
+
 # Setup a logger
 logger = logging.getLogger('BuildOthello')
 logger.setLevel(logging.INFO)
@@ -40,7 +44,7 @@ class BuildOthello(PluginBase):
                         self.util.save(self.root_node, self.commit_hash, self.branch_name, 'Set initial GS')
         
         gsNode = {"rootId": active_node.get("rootId"), "nodePath": core.get_pointer_path(active_node, "currentState")}
-        flips = valid(gsNode)
+        flips = ValidTiles.main(self, gsNode)
         
         ## OBJECT
         

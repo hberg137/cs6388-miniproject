@@ -23,10 +23,10 @@ class ValidTiles(PluginBase):
         META = self.META
 
         gsNode = {"rootId": active_node.get("rootId"), "nodePath": core.get_pointer_path(active_node, "currentState")}
+        #logger.warn(core.get_children_paths(active_node))
         
         curPlayerNode = {"rootId": active_node.get("rootId"), "nodePath": core.get_pointer_path(gsNode, "currentPlayer")}
         color = core.get_attribute(curPlayerNode, "color")
-        canPlace = False  
         diffCols = []
         sameCols = []
         flips = {}

@@ -239,7 +239,7 @@ define([
             icon: 'glyphicon glyphicon-step-backward',
             clickFn: function (/*data*/) {
                 const context = _client.getCurrentPluginContext('Undo');
-                context.managerConfig.activeNode = self._currentNodeParentId;
+                context.managerConfig.activeNode = self._currentNodeId;
                 context.managerConfig.namespace = null;
                 context.pluginConfig = {};
 
@@ -264,7 +264,7 @@ define([
             icon: 'glyphicon glyphicon-random',
             clickFn: function (/*data*/) {
                 const context = _client.getCurrentPluginContext('AutoPlace');
-                context.managerConfig.activeNode = self._currentNodeParentId;
+                context.managerConfig.activeNode = self._currentNodeId;
                 context.managerConfig.namespace = null;
                 context.pluginConfig = {};
 

@@ -22,7 +22,8 @@ There are a few plugins that are used to update the state of the game as the use
 ## Usage
 ### Current Status
 While the visualizer is not currently fully functional, if you open the OthelloViz tab from the Game directory, the undo (rewind icon) and auto (shuffle icon) buttons on the toolbar are functional! To see their effect, open the Game folder in the panel on the right and check out the new game states as they are created (from auto) or deleted (from undo).
-A board will show, but the functionality to place tiles yourself will NOT work! However, you can use the auto button to automatically place new tiles. After doing this, you must wait a few seconds for the board to update.
+
+*Update*: A board will show, but the functionality to place tiles yourself will NOT work! However, you can use the auto button on the top toolbar to automatically place new tiles. After doing this, you must wait a few seconds (5-15) for the board to update.
 ### General
 After running this project and creating a new project in WebGME based on the supplied seed ("seed"), an Othello game can be played. Assuming the visualizer works, simply navigate to the Game folder and open the OthelloViz visualizer on the lefthand side. To play the game, place pieces on whatever tiles are valid on each turn, which should be highlighted when you put your cursor over them. A string of text on top of the board should tell you whose turn it is. Other text will inform you of how many tiles each player currently has on the board. Additionally, on the top toolbar, there is an undo icon which will undo the last move, and an auto icon that will automatically place a tile for this turn. If you do not want to undo a whole bunch and want to start a new game, simply create a new project with the supplied seed. Have fun and enjoy your (hopefully functional) game of Othello!
 

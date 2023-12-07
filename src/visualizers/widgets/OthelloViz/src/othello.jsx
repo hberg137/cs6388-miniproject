@@ -2,7 +2,7 @@ import React, {useCallback, useState} from 'react';
 import Board from './board';
 import CONSTANTS from 'constants.js';
 
-export default function Othello({player, win, board}) {
+export default function Othello({player, counts, win, board}) {
     const getLabel = () => {
         if(!win) {
             let finished = false;
@@ -15,10 +15,15 @@ export default function Othello({player, win, board}) {
                 return 'Game ended in tie.';
             }
             
+            console.log(counts["whiteCount"])
             if(player === "black") {
-                return 'Player black moves...';
+                var str = 'Player black moves... ';
+                str = str.concat("black count: ", counts["blackCount"], ", white count: ", counts["whiteCount"]);
+                return str;
             } else {
-                return 'Player white moves...';
+                var str = 'Player white moves... ';
+                str = str.concat("white count: ", counts["whiteCount"], ", black count: ", counts["blackCount"]);
+                return str;
             }
         } else {
             if(win.player === "black") {

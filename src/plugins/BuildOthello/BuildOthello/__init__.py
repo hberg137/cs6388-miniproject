@@ -71,6 +71,8 @@ class BuildOthello(PluginBase):
         currentGS["currentMove"] = {"color": core.get_attribute(curMoveNode, "color"),
                                     "row": core.get_attribute(curMovePar, "row"),
                                     "column": core.get_attribute(curMovePar, "column")}
+        currentGS["whiteCount"] = core.get_attribute(gsNode, "whiteCount")
+        currentGS["blackCount"] = core.get_attribute(gsNode, "blackCount")
         
         # Get board node
         boardNode = core.get_parent(curMovePar)

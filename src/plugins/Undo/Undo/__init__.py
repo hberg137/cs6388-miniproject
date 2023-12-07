@@ -22,10 +22,12 @@ class Undo(PluginBase):
         core = self.core
         
         gsNode = {"rootId": active_node.get("rootId"), "nodePath": core.get_pointer_path(active_node, "currentState")}
+        logger.info(core.get_pointer_path(active_node, "currentState"))
         prevNode = {"rootId": gsNode.get("rootId"), "nodePath": core.get_pointer_path(gsNode, "previousState")}
         if prevNode["nodePath"] == None:
             return
         core.set_pointer(active_node, "currentState", prevNode)
         core.delete_node(gsNode)
+        logger.info("Undo successful")
         
         self.util.save(self.root_node, self.commit_hash, self.branch_name, 'Undo GS')

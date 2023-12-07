@@ -79,12 +79,12 @@ define([
     OthelloVizControl.prototype._createDescriptor = function () {
         const {_client, _META, _currentNodeId, _logger} = this;
         if (typeof _currentNodeId === 'string') {
-            const context = _client.getCurrentPluginContext('BuildDescriptor');
+            const context = _client.getCurrentPluginContext('BuildOthello');
             context.managerConfig.activeNode = _currentNodeId;
             context.managerConfig.namespace = null;
             context.pluginConfig = {};
 
-            _client.runBrowserPlugin('BuildDescriptor', context, (err, result)=>{
+            _client.runBrowserPlugin('BuildOthello', context, (err, result)=>{
                 // console.log('export:', err, result);
                 if (err === null && result && result.success) {
                     const descriptor = JSON.parse(result.messages[0].message);
@@ -234,31 +234,55 @@ define([
         this._toolbarItems.push(toolBar.addSeparator());
 
         /************** Go to hierarchical parent button ****************/
-        this.$btnNewGame = toolBar.addButton({
-            title: 'Start new game',
-            icon: 'glyphicon glyphicon-plus',
+        this.$btnUndo = toolBar.addButton({
+            title: 'Undo last move',
+            icon: 'glyphicon glyphicon-step-backward',
             clickFn: function (/*data*/) {
-                const context = _client.getCurrentPluginContext('CreateGame');
+                const context = _client.getCurrentPluginContext('Undo');
                 context.managerConfig.activeNode = self._currentNodeParentId;
                 context.managerConfig.namespace = null;
                 context.pluginConfig = {};
 
-                _client.runServerPlugin('CreateGame', context, (err, result)=>{
+                _client.runServerPlugin('Undo', context, (err, result)=>{
                     // console.log('export:', err, result);
                     if (err === null && result && result.success) {
                         //TODO: - there is nothing to do as the plugin updated the model
-                        const newGamePath = result.messages[0].message;
-                        WebGMEGlobal.State.registerActiveObject(newGamePath);
-                        WebGMEGlobal.State.registerActiveVisualizer('OthelloViz');
+                        // const newGamePath = result.messages[0].message;
+                        //WebGMEGlobal.State.registerActiveObject(self._currentNodeId);
                     } else {
                         //TODO - make a proper way of handling this
-                        _logger.error('Failed to initiate new game', err);
+                        _logger.error('Failed to undo', err);
                     }
                 });
             }
         });
-        this._toolbarItems.push(this.$btnNewGame);
-        this.$btnNewGame.hide();
+        this._toolbarItems.push(this.$btnUndo);
+        this.$btnUndo.hide();
+
+        this.$btnAuto = toolBar.addButton({
+            title: 'Automatically make next move',
+            icon: 'glyphicon glyphicon-random',
+            clickFn: function (/*data*/) {
+                const context = _client.getCurrentPluginContext('AutoPlace');
+                context.managerConfig.activeNode = self._currentNodeParentId;
+                context.managerConfig.namespace = null;
+                context.pluginConfig = {};
+
+                _client.runServerPlugin('AutoPlace', context, (err, result)=>{
+                    // console.log('export:', err, result);
+                    if (err === null && result && result.success) {
+                        //TODO: - there is nothing to do as the plugin updated the model
+                        // const newGamePath = result.messages[0].message;
+                        //WebGMEGlobal.State.registerActiveObject(self._currentNodeId);
+                    } else {
+                        //TODO - make a proper way of handling this
+                        _logger.error('Failed to undo', err);
+                    }
+                });
+            }
+        });
+        this._toolbarItems.push(this.$btnAuto);
+        this.$btnAuto.hide();
 
         /************** Checkbox example *******************/
 

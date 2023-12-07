@@ -83,11 +83,15 @@ define([
             context.managerConfig.activeNode = _currentNodeId;
             context.managerConfig.namespace = null;
             context.pluginConfig = {};
+            console.log("Building Othello object")
 
-            _client.runBrowserPlugin('BuildOthello', context, (err, result)=>{
+            _client.runServerPlugin('BuildOthello', context, (err, result)=>{
                 // console.log('export:', err, result);
                 if (err === null && result && result.success) {
-                    const descriptor = JSON.parse(result.messages[0].message);
+                    //console.log("test!!")
+                    //console.log(result.messages[0].message);
+                    const descriptor = JSON.parse(result.messages[0].message)[0];
+                    //console.log(descriptor["currentPlayer"]);
                     this._descriptor = descriptor;
                     if(this._updateWidget) {
                         this._updateWidget(descriptor);

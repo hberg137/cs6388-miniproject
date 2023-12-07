@@ -5,7 +5,7 @@ import CONSTANTS from 'constants.js';
 export default function Othello({player, win, board}) {
     const getLabel = () => {
         if(!win) {
-            let finished = true;
+            let finished = false;
             board.forEach(piece => {
                 if(piece === CONSTANTS.PIECE.EMPTY) {
                     finished = false;
@@ -15,16 +15,16 @@ export default function Othello({player, win, board}) {
                 return 'Game ended in tie.';
             }
             
-            if(player === CONSTANTS.PLAYER.B) {
-                return 'Player O moves...';
+            if(player === "black") {
+                return 'Player black moves...';
             } else {
-                return 'Player X moves...';
+                return 'Player white moves...';
             }
         } else {
-            if(win.player === CONSTANTS.PLAYER.B) {
-                return 'Player O won!';
+            if(win.player === "black") {
+                return 'Player black won!';
             } else {
-                return 'Player X won!';
+                return 'Player white won!';
             }
         }
     }

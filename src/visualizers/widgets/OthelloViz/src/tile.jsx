@@ -23,30 +23,31 @@ export default function Tile({player, piece, position, win}) {
 
     const getPiece = () => {
         console.log('GP:',player,piece,position,win);
-        const styleO = {fontSize:'90px', paddingLeft:'8px',paddingTop:'2px'};
-        const styleX = {fontSize:'90px', paddingLeft:'13px',paddingTop:'2px'};
-        const dStyle = player === CONSTANTS.PLAYER.B ? 
-            JSON.parse(JSON.stringify(styleO)) : 
-            JSON.parse(JSON.stringify(styleX));
+
+        const styleB = {fontSize:'90px', paddingLeft:'2px',paddingTop:'2px'};
+        const styleW = {fontSize:'90px', paddingLeft:'8px',paddingTop:'2px'};
+        const dStyle = player === "black" ? 
+            JSON.parse(JSON.stringify(styleB)) : 
+            JSON.parse(JSON.stringify(styleW));
         dStyle.opacity = 0.5;
 
         let style = dStyle;
         let myIcon = null;
-        switch (piece) {
-            case CONSTANTS.PIECE.B:
-                style = styleO;
-                myIcon = icon({name:'o', family:'classic', style:'solid'});
+        switch (piece["color"]) {
+            case "black":
+                style = styleB;
+                myIcon = icon({name:'circle', family:'classic', style:'solid'});
                 break;
-            case CONSTANTS.PIECE.W:
-                style = styleX;
-                myIcon = icon({name:'x', family:'classic', style:'solid'});
+            case "white":
+                style = styleW;
+                myIcon = icon({name:'o', family:'classic', style:'solid'});
                 break;
             default:
                 if(hasMouse) {
-                    if(player === CONSTANTS.PLAYER.B) {
-                        myIcon = icon({name:'o', family:'classic', style:'solid'});
+                    if(player === "black") {
+                        myIcon = icon({name:'circle', family:'classic', style:'solid'});
                     } else {
-                        myIcon = icon({name:'x', family:'classic', style:'solid'});
+                        myIcon = icon({name:'o', family:'classic', style:'solid'});
                     }
                 }
         }

@@ -44,7 +44,7 @@ class BuildOthello(PluginBase):
                         self.util.save(self.root_node, self.commit_hash, self.branch_name, 'Set initial GS')
         
         gsNode = {"rootId": active_node.get("rootId"), "nodePath": core.get_pointer_path(active_node, "currentState")}
-        flips = ValidTiles.main(self, gsNode)
+        flips = ValidTiles.main(self)
         
         ## OBJECT
         
@@ -114,10 +114,12 @@ class BuildOthello(PluginBase):
         
         #self.util.save(self.root_node, self.commit_hash, self.branch_name, 'New GS created')
         
-        rowFlip = 2
-        colFlip = 3
-        chains = gameObj[0]["board"][rowFlip][colFlip]["flips"]
-        logger.error(chains) 
+        #rowFlip = 2
+        #colFlip = 3
+        #chains = gameObj[0]["board"][rowFlip][colFlip]["flips"]
+        #logger.error(chains)
+
+        self.create_message(active_node, json.dumps(gameObj))
         
         #flip([rowFlip, colFlip], chains)
         #undo()

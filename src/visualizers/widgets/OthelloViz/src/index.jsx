@@ -6,7 +6,7 @@ const container = document.getElementById(VISUALIZER_INSTANCE_ID);
 const root = ReactDOMClient.createRoot(container);
 const onUpdateFromControl = (descriptor) => {
     console.log('rendering', descriptor);
-    root.render(<Othello player = {descriptor.player} board = {descriptor.board} win = {descriptor.win}/>);
+    root.render(<Othello player = {descriptor.currentPlayer} board = {descriptor.board} win = {false}/>);
 }
 console.log('connecting to control');
 WEBGME_CONTROL.registerUpdate(onUpdateFromControl);

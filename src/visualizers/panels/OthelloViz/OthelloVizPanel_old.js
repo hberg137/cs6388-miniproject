@@ -6,8 +6,7 @@
 define([
     'js/PanelBase/PanelBaseWithHeader',
     'js/PanelManager/IActivePanel',
-    //'widgets/OthelloViz/OthelloVizWidget',
-    'miniproject/bundles/OthelloVizWidget.bundle',
+    'widgets/OthelloViz/OthelloVizWidget',
     './OthelloVizControl'
 ], function (
     PanelBaseWithHeader,
@@ -17,7 +16,7 @@ define([
 ) {
     'use strict';
 
-    function OthelloVizPanelNew(layoutManager, params) {
+    function OthelloVizPanelOld(layoutManager, params) {
         var options = {};
         //set properties from options
         options[PanelBaseWithHeader.OPTIONS.LOGGER_INSTANCE_NAME] = 'OthelloVizPanel';
@@ -27,7 +26,6 @@ define([
         PanelBaseWithHeader.apply(this, [options, layoutManager]);
 
         this._client = params.client;
-        this.appId = `OthelloViz-viz-id`;
 
         //initialize UI
         this._initialize();
@@ -40,29 +38,24 @@ define([
     _.extend(OthelloVizPanel.prototype, IActivePanel.prototype);
 
     OthelloVizPanel.prototype._initialize = function () {
+        var self = this;
 
-        this.$el.prop('id', this.appId);
-        this.$el.css({
-            width: '100%',
-            height: '100%',
-        });
+        //set Widget title
+        this.setTitle('');
+
+        this.widget = new OthelloVizWidget(this.logger, this.$el);
+
+        this.widget.setTitle = function (title) {
+            self.setTitle(title);
+        };
 
         this.control = new OthelloVizControl({
             logger: this.logger,
-            client: this._client
+            client: this._client,
+            widget: this.widget
         });
 
-        this.widget = null;
-
         this.onActivate();
-    };
-
-    OthelloVizPanel.prototype.afterAppend = function afterAppend() {
-        console.log('AFTER APPEND');
-        /*if(!this.widget) {
-            this.widget = OthelloVizWidget(this.appId, this.control, this);
-        }*/
-        OthelloVizWidget(this.appId, this.control, this);
     };
 
     /* OVERRIDE FROM WIDGET-WITH-HEADER */
@@ -73,15 +66,15 @@ define([
 
     };
 
-    /*OthelloVizPanel.prototype.onResize = function (width, height) {
+    OthelloVizPanel.prototype.onResize = function (width, height) {
         this.logger.debug('onResize --> width: ' + width + ', height: ' + height);
         this.widget.onWidgetContainerResize(width, height);
-    };*/
+    };
 
     /* * * * * * * * Visualizer life cycle callbacks * * * * * * * */
     OthelloVizPanel.prototype.destroy = function () {
         this.control.destroy();
-        // this.widget.destroy();
+        this.widget.destroy();
 
         PanelBaseWithHeader.prototype.destroy.call(this);
         WebGMEGlobal.KeyboardManager.setListener(undefined);
@@ -89,18 +82,18 @@ define([
     };
 
     OthelloVizPanel.prototype.onActivate = function () {
-        // this.widget.onActivate();
+        this.widget.onActivate();
         this.control.onActivate();
         WebGMEGlobal.KeyboardManager.setListener(this.widget);
         WebGMEGlobal.Toolbar.refresh();
     };
 
     OthelloVizPanel.prototype.onDeactivate = function () {
-        // this.widget.onDeactivate();
+        this.widget.onDeactivate();
         this.control.onDeactivate();
         WebGMEGlobal.KeyboardManager.setListener(undefined);
         WebGMEGlobal.Toolbar.refresh();
     };
-    
+
     return OthelloVizPanel;
 });

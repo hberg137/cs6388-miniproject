@@ -2,8 +2,7 @@ import React, {useCallback, useState} from 'react';
 import Board from './board';
 import CONSTANTS from 'constants.js';
 
-export default function Othello() {
-    {/*
+export default function Othello({player, win, board}) {
     const getLabel = () => {
         if(!win) {
             let finished = true;
@@ -29,11 +28,10 @@ export default function Othello() {
             }
         }
     }
-*/}
     return (
     <div style={{ width: '100%', height: '100%', fontFamily:'fantasy', fontSize:'36px', fontWeight:'bold'}}>
-        {'test'}
-        <Board />
+        {getLabel()}
+        <Board player={player} board={board} win={win}/>
     </div>
     );
 }

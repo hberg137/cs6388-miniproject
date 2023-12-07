@@ -15,9 +15,25 @@
       }
     },
     "plugins": {
-      "Counting": {
-        "src": "src/plugins/Counting",
-        "test": "test/plugins/Counting"
+      "BuildOthello": {
+        "src": "src/plugins/BuildOthello",
+        "test": "test/plugins/BuildOthello"
+      },
+      "ValidTiles": {
+        "src": "src/plugins/ValidTiles",
+        "test": "test/plugins/ValidTiles"
+      },
+      "FlipTiles": {
+        "src": "src/plugins/FlipTiles",
+        "test": "test/plugins/FlipTiles"
+      },
+      "Undo": {
+        "src": "src/plugins/Undo",
+        "test": "test/plugins/Undo"
+      },
+      "AutoPlace": {
+        "src": "src/plugins/AutoPlace",
+        "test": "test/plugins/AutoPlace"
       }
     }
   },

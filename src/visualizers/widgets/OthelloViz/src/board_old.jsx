@@ -1,8 +1,9 @@
 import CONSTANTS from 'constants.js';
-import Tile from './tile';
+{/* import Tile from './tile'; */}
 
-export default function BoardN({player, board, win}) {
+export default function BoardOld() {
 
+    {/*
     const getTiles = () => {
         const tiles = [];
         board.forEach((value, index) => {
@@ -11,6 +12,7 @@ export default function BoardN({player, board, win}) {
 
         return tiles;
     }
+    */}
 
     return (
         <div style={{
@@ -19,7 +21,6 @@ export default function BoardN({player, board, win}) {
             gap: '0px',
             width: '300px'
         }}>
-            {getTiles()}
         </div>
     )
 }
